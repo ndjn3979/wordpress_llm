@@ -1,0 +1,824 @@
+{
+  "metadata": {
+    "title": "WordPress Plugin Troubleshooting Knowledge Base",
+    "description": "Real-world troubleshooting articles for common WordPress plugin integration issues",
+    "source": "Compiled from official documentation, GitHub issues, and community forums",
+    "last_updated": "2025-05-25",
+    "total_articles": 25,
+    "categories": [
+      "WooCommerce Integration Issues",
+      "Email Marketing Plugin Conflicts",
+      "SEO Plugin Conflicts", 
+      "Page Builder Conflicts",
+      "General Plugin Troubleshooting"
+    ]
+  },
+  "integration_scenarios": [
+    {
+      "scenario_id": "woocommerce_mailchimp",
+      "name": "WooCommerce + Mailchimp Integration",
+      "description": "Sync issues between WooCommerce store data and Mailchimp email lists",
+      "common_symptoms": [
+        "Products not syncing to Mailchimp",
+        "Orders stuck at 0/X in sync progress", 
+        "Missing resync button",
+        "New customers not appearing in Mailchimp lists",
+        "Sync process appears to run but never completes"
+      ],
+      "typical_causes": [
+        "Plugin conflicts with caching or security plugins",
+        "Server memory limits too low",
+        "API connection issues with Mailchimp",
+        "WordPress cron jobs not running properly",
+        "Large dataset overwhelming sync process"
+      ]
+    },
+    {
+      "scenario_id": "yoast_elementor",
+      "name": "Yoast SEO + Elementor Conflicts",
+      "description": "Page builder conflicts with SEO plugin functionality",
+      "common_symptoms": [
+        "Elementor editor won't load or stays in green update state",
+        "Yoast SEO analysis not working on Elementor pages",
+        "PHP errors when editing pages with Elementor",
+        "Cart widgets displaying incorrectly",
+        "Meta data not being read properly"
+      ],
+      "typical_causes": [
+        "Plugin version incompatibilities",
+        "Theme conflicts with page builder",
+        "JavaScript conflicts between plugins",
+        "API endpoint errors during content analysis",
+        "WooCommerce function conflicts"
+      ]
+    },
+    {
+      "scenario_id": "general_plugin_conflicts",
+      "name": "General Plugin Conflicts",
+      "description": "Common plugin compatibility issues across WordPress sites",
+      "common_symptoms": [
+        "White screen of death",
+        "Site crashes or becomes unresponsive",
+        "Features suddenly stop working",
+        "Admin dashboard becomes inaccessible",
+        "JavaScript errors in browser console"
+      ],
+      "typical_causes": [
+        "Multiple plugins using same JavaScript libraries",
+        "Theme incompatibility with plugins",
+        "Outdated plugin versions",
+        "Memory limit exceeded",
+        "Database conflicts"
+      ]
+    },
+    {
+      "scenario_id": "woocommerce_stripe",
+      "name": "WooCommerce + Stripe Payment Issues",
+      "description": "Payment gateway integration problems affecting checkout process",
+      "common_symptoms": [
+        "Payments failing at checkout",
+        "Customers redirected to blank page after payment",
+        "Orders stuck in 'Pending' status",
+        "Credit card forms not loading",
+        "SSL certificate errors during payment",
+        "Webhook notifications not working"
+      ],
+      "typical_causes": [
+        "Incorrect API keys or webhook endpoints",
+        "SSL certificate issues on checkout pages",
+        "Theme conflicts with payment form styling",
+        "Caching plugins interfering with payment process",
+        "Currency or region configuration problems",
+        "3D Secure authentication failures"
+      ]
+    },
+    {
+      "scenario_id": "security_plugin_blocking",
+      "name": "Security Plugins Blocking Legitimate Functions",
+      "description": "Overly aggressive security plugins preventing normal site operations",
+      "common_symptoms": [
+        "Admin users getting locked out",
+        "Contact forms not sending emails",
+        "AJAX requests being blocked",
+        "API integrations failing",
+        "File uploads being rejected",
+        "Login attempts being flagged as suspicious"
+      ],
+      "typical_causes": [
+        "Security plugin rules too restrictive",
+        "IP addresses incorrectly blacklisted",
+        "User agent filtering blocking legitimate traffic",
+        "File type restrictions preventing uploads",
+        "Rate limiting affecting normal usage",
+        "False positive malware detection"
+      ]
+    },
+    {
+      "scenario_id": "gutenberg_custom_fields",
+      "name": "Gutenberg + Custom Fields Plugin Conflicts",
+      "description": "Block editor compatibility issues with custom field plugins",
+      "common_symptoms": [
+        "Custom fields not saving in Gutenberg",
+        "Block editor crashing when loading posts",
+        "Meta boxes disappearing from edit screen",
+        "Custom field values not displaying on frontend",
+        "JavaScript errors in block editor",
+        "Gutenberg reverting to classic editor"
+      ],
+      "typical_causes": [
+        "Custom field plugins not updated for block editor",
+        "REST API conflicts with custom post types",
+        "Meta box registration conflicts",
+        "JavaScript library version conflicts",
+        "Block editor hooks not properly implemented",
+        "Theme functions interfering with editor"
+      ]
+    },
+    {
+      "scenario_id": "caching_plugin_conflicts",
+      "name": "Caching Plugin Breaking Site Features",
+      "description": "Aggressive caching interfering with dynamic content and user interactions",
+      "common_symptoms": [
+        "Dynamic content not updating",
+        "User login/logout not working properly",
+        "Shopping cart contents not persisting",
+        "AJAX requests returning cached responses",
+        "Admin area showing stale content",
+        "Contact forms submitting but not processing"
+      ],
+      "typical_causes": [
+        "Pages that should be excluded from cache being cached",
+        "Database query caching interfering with dynamic content",
+        "CDN caching dynamic API responses",
+        "Object caching conflicts with session data",
+        "Page caching not respecting user-specific content",
+        "Mobile cache serving desktop version or vice versa"
+      ]
+    },
+    {
+      "scenario_id": "backup_plugin_resource_issues",
+      "name": "Backup Plugins Causing Performance Problems",
+      "description": "Backup processes overwhelming server resources and conflicting with other plugins",
+      "common_symptoms": [
+        "Site becomes extremely slow during backup",
+        "Backup process failing or timing out",
+        "Other scheduled tasks not running during backup",
+        "Database locks preventing normal operations",
+        "Server memory or disk space exhaustion",
+        "Backup files corrupted or incomplete"
+      ],
+      "typical_causes": [
+        "Backup running during peak traffic hours",
+        "Insufficient server resources allocated for backup",
+        "Large database or file sizes overwhelming backup process",
+        "Conflicts with other cron jobs or scheduled tasks",
+        "Backup plugin not optimized for large sites",
+        "Cloud storage API limits being exceeded"
+      ]
+    },
+    {
+      "scenario_id": "seo_pagespeed_conflicts",
+      "name": "SEO vs Page Speed Plugin Conflicts",
+      "description": "Optimization plugins working at cross-purposes, degrading performance or SEO",
+      "common_symptoms": [
+        "Page speed optimization breaking SEO functionality",
+        "Critical CSS generation interfering with above-fold content",
+        "JavaScript minification breaking SEO tracking scripts",
+        "Image optimization removing important alt tags or structured data",
+        "Lazy loading preventing search engine crawling",
+        "CSS/JS optimization breaking schema markup"
+      ],
+      "typical_causes": [
+        "Aggressive minification breaking structured data",
+        "Lazy loading images that should load immediately for SEO",
+        "Critical CSS generation removing important styles",
+        "JavaScript deferring breaking tracking pixels",
+        "Image compression removing metadata",
+        "Font optimization interfering with web font SEO benefits"
+      ]
+    }
+  ],
+  "troubleshooting_articles": [
+    {
+      "article_id": "woo_conflict_testing",
+      "title": "How to Test for Plugin and Theme Conflicts in WooCommerce",
+      "category": "WooCommerce Integration Issues",
+      "scenario": "woocommerce_mailchimp",
+      "problem_description": "WooCommerce features not working properly, suspected plugin or theme conflicts",
+      "symptoms": [
+        "Orders showing wrong status",
+        "Checkout process failing",
+        "Products not displaying correctly",
+        "Payment gateway issues"
+      ],
+      "solution_steps": [
+        "Create a backup of your site before testing",
+        "Deactivate all plugins except WooCommerce and problematic extensions",
+        "Test if the conflict still exists by recreating the issue",
+        "If conflict resolved, reactivate plugins one by one",
+        "Test after each reactivation to identify the conflicting plugin",
+        "Switch to default WordPress theme if plugins aren't the issue",
+        "Check for 'Must-Use' plugins that can't be deactivated normally",
+        "Clear browser cache during testing to see current site version"
+      ],
+      "prevention_tips": [
+        "Keep all plugins and themes updated",
+        "Use staging sites for testing",
+        "Monitor plugin compatibility before installing"
+      ],
+      "tools_mentioned": [
+        "Health Check & Troubleshooting plugin",
+        "WP Staging plugin", 
+        "Query Monitor",
+        "Meks Quick Plugin Disabler"
+      ],
+      "source_url": "https://woocommerce.com/document/how-to-test-for-conflicts/"
+    },
+    {
+      "article_id": "mailchimp_sync_issues",
+      "title": "Mailchimp WooCommerce Sync Not Completing",
+      "category": "Email Marketing Plugin Conflicts",
+      "scenario": "woocommerce_mailchimp", 
+      "problem_description": "Mailchimp for WooCommerce plugin fails to sync products and orders",
+      "symptoms": [
+        "Sync progress stuck at 0 products/orders",
+        "Missing resync button in admin",
+        "New products never sync to Mailchimp",
+        "Orders not appearing in Mailchimp",
+        "Sync appears to run but never completes"
+      ],
+      "solution_steps": [
+        "Check plugin version - ensure using latest version",
+        "Verify server meets minimum requirements (PHP 7.0+, SOAP support)",
+        "Increase server memory limit to 1GB for large syncs",
+        "Deactivate caching plugins temporarily",
+        "Check if WordPress cron is functioning properly", 
+        "Try manual sync using WP-CLI commands",
+        "Verify API keys are correct and not expired",
+        "Check server logs for connection blocks by Akamai",
+        "Delete and reinstall plugin if necessary",
+        "Use staging environment for testing"
+      ],
+      "error_codes": [
+        "Error Code 400: Product with provided ID does not exist",
+        "Error Code 404: Resource Not Found", 
+        "Error Code 0: Connection timeout or server issue"
+      ],
+      "prevention_tips": [
+        "Monitor sync progress regularly",
+        "Keep plugin updated",
+        "Ensure adequate server resources",
+        "Test on staging before going live"
+      ],
+      "source_url": "https://github.com/mailchimp/mc-woocommerce/issues/374"
+    },
+    {
+      "article_id": "yoast_elementor_conflicts",
+      "title": "Resolving Yoast SEO and Elementor Conflicts", 
+      "category": "SEO Plugin Conflicts",
+      "scenario": "yoast_elementor",
+      "problem_description": "Conflicts between Yoast SEO and Elementor page builder causing editor issues",
+      "symptoms": [
+        "Elementor editor won't load properly",
+        "Update button stays green after saving",
+        "PHP warnings about missing post data",
+        "WooCommerce cart widget displays incorrectly",
+        "SEO analysis not working on Elementor pages"
+      ],
+      "solution_steps": [
+        "Update both plugins to latest versions",
+        "Check for known compatibility issues on GitHub",
+        "Use Health Check plugin to test in troubleshooting mode",
+        "Deactivate all other plugins except Yoast and Elementor",
+        "Switch to default WordPress theme for testing",
+        "Clear all caches after making changes",
+        "Check browser console for JavaScript errors",
+        "Monitor for PHP warnings in debug logs",
+        "Contact plugin support with specific error details"
+      ],
+      "known_issues": [
+        "Yoast v19.2 had bug with page builders when no user data available",
+        "WooCommerce function conflicts in template files",
+        "Cart widget preview showing instead of cart value"
+      ],
+      "workarounds": [
+        "Disable WP_DEBUG on live sites",
+        "Use alternative cart widgets if conflicts persist",
+        "Consider using Yoast-compatible page builder alternatives"
+      ],
+      "source_url": "https://wordpress.org/support/topic/conflicts-with-elementor-6/"
+    },
+    {
+      "article_id": "general_plugin_troubleshooting",
+      "title": "Ultimate Guide to WordPress Plugin Conflict Resolution",
+      "category": "General Plugin Troubleshooting", 
+      "scenario": "general_plugin_conflicts",
+      "problem_description": "General approach to identifying and resolving plugin conflicts",
+      "symptoms": [
+        "White screen of death",
+        "Site becomes unresponsive", 
+        "Admin panel inaccessible",
+        "JavaScript errors on frontend",
+        "Features suddenly stop working"
+      ],
+      "solution_steps": [
+        "Determine level of access (admin panel vs complete lockout)",
+        "Clear browser and server caches first",
+        "Update all plugins and WordPress core",
+        "Switch to default theme temporarily",
+        "Deactivate all plugins except essential ones",
+        "Reactivate plugins one by one testing each time",
+        "Check browser console for JavaScript errors",
+        "Use staging site for safe testing",
+        "Document which combinations cause issues",
+        "Report bugs to plugin developers"
+      ],
+      "access_scenarios": {
+        "admin_access_available": [
+          "Clear caches first",
+          "Update plugins",
+          "Test theme conflicts",
+          "Systematic plugin deactivation"
+        ],
+        "locked_out_completely": [
+          "Use FTP to rename plugins folder",
+          "Restore from backup",
+          "Use hosting control panel file manager",
+          "Access via staging site"
+        ]
+      },
+      "prevention_strategies": [
+        "Keep regular backups",
+        "Use staging sites for testing",
+        "Monitor plugin update changelogs",
+        "Limit number of active plugins",
+        "Choose well-maintained plugins"
+      ],
+      "source_url": "https://wpengine.com/resources/fix-plugin-conflicts-ultimate-guide/"
+    },
+    {
+      "article_id": "stripe_payment_failures",
+      "title": "Troubleshooting WooCommerce Stripe Payment Failures",
+      "category": "WooCommerce Integration Issues",
+      "scenario": "woocommerce_stripe",
+      "problem_description": "Customers unable to complete payments through Stripe gateway",
+      "symptoms": [
+        "Payment forms not loading on checkout",
+        "Customers redirected to blank page after payment attempt",
+        "Orders remaining in pending status despite successful payment",
+        "SSL errors during payment process",
+        "Webhook events not being received"
+      ],
+      "solution_steps": [
+        "Verify Stripe API keys are correct and match environment (test vs live)",
+        "Check SSL certificate is properly installed and valid",
+        "Test checkout process with different payment methods",
+        "Review Stripe dashboard for failed payment logs",
+        "Verify webhook endpoints are correctly configured",
+        "Check for theme conflicts by switching to default theme",
+        "Deactivate caching plugins during payment testing",
+        "Ensure currency settings match Stripe account configuration",
+        "Test with 3D Secure enabled/disabled",
+        "Review server logs for PHP errors during checkout"
+      ],
+      "common_errors": [
+        "Invalid API key provided",
+        "SSL certificate verification failed",
+        "Currency not supported in your region",
+        "Webhook signature verification failed",
+        "Payment requires authentication"
+      ],
+      "prevention_tips": [
+        "Test payment flows after plugin updates",
+        "Monitor Stripe dashboard for failed payments",
+        "Keep SSL certificates up to date",
+        "Use staging environment for testing payment changes"
+      ],
+      "tools_mentioned": [
+        "Stripe Dashboard",
+        "Browser Developer Tools",
+        "SSL certificate checkers",
+        "Payment testing cards"
+      ],
+      "source_url": "https://woocommerce.com/document/stripe/"
+    },
+    {
+      "article_id": "security_plugin_overblocking",
+      "title": "Security Plugins Blocking Legitimate Site Functions",
+      "category": "General Plugin Troubleshooting",
+      "scenario": "security_plugin_blocking",
+      "problem_description": "Security plugins preventing normal website operations",
+      "symptoms": [
+        "Admin users being locked out of dashboard",
+        "Contact forms failing to send emails",
+        "AJAX requests returning 403 errors",
+        "File uploads being rejected",
+        "API integrations suddenly stopping",
+        "Legitimate users flagged as suspicious"
+      ],
+      "solution_steps": [
+        "Identify which security plugin is causing the issue",
+        "Check security plugin logs for recent blocks or alerts",
+        "Whitelist your IP address in security plugin settings",
+        "Review and adjust security rule sensitivity levels",
+        "Temporarily disable specific security features to isolate issue",
+        "Check if legitimate file types are being blocked",
+        "Review user agent filtering rules",
+        "Adjust rate limiting settings if too aggressive",
+        "Examine firewall rules for overly broad restrictions",
+        "Test functionality after each security setting change"
+      ],
+      "common_security_features_causing_issues": [
+        "Brute force protection locking out admins",
+        "File upload restrictions blocking legitimate files",
+        "SQL injection filters blocking valid database queries", 
+        "Cross-site scripting protection interfering with forms",
+        "Rate limiting affecting normal browsing patterns"
+      ],
+      "balancing_tips": [
+        "Start with moderate security settings and increase gradually",
+        "Monitor security logs regularly for false positives",
+        "Create exception rules for known good IP addresses",
+        "Test all site functionality after security plugin installation",
+        "Use staging environment to test security configurations"
+      ],
+      "source_url": "https://wordpress.org/support/topic/security-plugin-conflicts/"
+    },
+    {
+      "article_id": "gutenberg_custom_field_issues",
+      "title": "Resolving Gutenberg and Custom Fields Plugin Conflicts",
+      "category": "SEO Plugin Conflicts",
+      "scenario": "gutenberg_custom_fields",
+      "problem_description": "Custom field plugins not working properly with block editor",
+      "symptoms": [
+        "Custom fields not appearing in Gutenberg editor",
+        "Meta boxes missing from post edit screen",
+        "Custom field values not saving when using block editor",
+        "JavaScript errors when switching to block editor",
+        "Block editor forcing switch back to classic editor",
+        "Custom post types not displaying correctly"
+      ],
+      "solution_steps": [
+        "Update custom fields plugin to latest version with Gutenberg support",
+        "Check plugin documentation for block editor compatibility",
+        "Enable 'show_in_rest' parameter for custom post types and fields",
+        "Review plugin settings for Gutenberg-specific options",
+        "Test with default WordPress theme to rule out theme conflicts",
+        "Check browser console for JavaScript errors in block editor",
+        "Verify REST API endpoints are working for custom fields",
+        "Consider switching to Gutenberg-native field solutions",
+        "Use classic editor plugin as temporary workaround",
+        "Contact plugin developer for Gutenberg compatibility roadmap"
+      ],
+      "compatibility_checks": [
+        "Plugin explicitly states Gutenberg support",
+        "Custom post types registered with 'show_in_rest' => true",
+        "Meta fields registered with 'show_in_rest' => true",
+        "Plugin uses block editor hooks instead of classic editor hooks",
+        "No JavaScript conflicts with block editor scripts"
+      ],
+      "alternatives": [
+        "Switch to Gutenberg-native plugins like ACF Pro",
+        "Use block patterns for repetitive custom content",
+        "Implement custom blocks for specific field requirements",
+        "Consider headless CMS approach for complex custom fields"
+      ],
+      "source_url": "https://wordpress.org/support/topic/gutenberg-custom-fields-conflicts/"
+    },
+    {
+      "article_id": "caching_breaking_features",
+      "title": "When Caching Plugins Break Dynamic Website Features",
+      "category": "General Plugin Troubleshooting",
+      "scenario": "caching_plugin_conflicts",
+      "problem_description": "Caching optimizations preventing dynamic content from working properly",
+      "symptoms": [
+        "User-specific content showing for wrong users",
+        "Shopping cart not updating when items added",
+        "Login/logout not working correctly",
+        "Comments or form submissions not appearing",
+        "Search results showing outdated information",
+        "Admin dashboard showing cached public content"
+      ],
+      "solution_steps": [
+        "Identify which caching layer is causing the issue (page, object, or database cache)",
+        "Exclude dynamic pages from page cache (cart, checkout, account pages)",
+        "Configure cache to exclude logged-in users from page caching",
+        "Set up cache exclusions for AJAX endpoints and API calls",
+        "Implement cache busting for user-specific content",
+        "Configure CDN to respect no-cache headers for dynamic content",
+        "Test cache behavior with different user states (logged in/out)",
+        "Review cache purging rules for content updates",
+        "Check mobile cache settings if mobile experience differs",
+        "Monitor cache hit rates to ensure exclusions are working"
+      ],
+      "pages_to_exclude_from_cache": [
+        "Shopping cart and checkout pages",
+        "User account and profile pages", 
+        "Login and registration pages",
+        "Search results pages",
+        "Contact and other form pages",
+        "Any page with personalized content"
+      ],
+      "debugging_techniques": [
+        "Test site behavior while logged in vs logged out",
+        "Check HTTP headers for cache-control directives",
+        "Use browser developer tools to identify cached responses",
+        "Test with cache disabled to confirm cache is the issue",
+        "Check cache plugin logs for hit/miss ratios"
+      ],
+      "source_url": "https://wordpress.org/support/topic/caching-conflicts/"
+    },
+    {
+      "article_id": "backup_performance_optimization",
+      "title": "Optimizing Backup Plugins to Prevent Site Performance Issues",
+      "category": "General Plugin Troubleshooting", 
+      "scenario": "backup_plugin_resource_issues",
+      "problem_description": "Backup processes consuming too many server resources and affecting site performance",
+      "symptoms": [
+        "Website becomes unresponsive during backup times",
+        "Backup process never completes successfully",
+        "Database connection errors during backup",
+        "Server running out of disk space",
+        "Other cron jobs failing to run",
+        "Backup files appearing corrupted"
+      ],
+      "solution_steps": [
+        "Schedule backups during off-peak hours (typically 2-4 AM)",
+        "Increase PHP memory limit and execution time for backup scripts",
+        "Configure incremental backups instead of full backups",
+        "Exclude unnecessary files and directories from backup",
+        "Split large backups into smaller chunks",
+        "Use cloud storage to avoid local disk space issues",
+        "Implement backup throttling to reduce server load",
+        "Monitor server resources during backup process",
+        "Set up backup notifications to track completion status",
+        "Consider using server-level backups for large sites"
+      ],
+      "optimization_strategies": [
+        "Exclude cache directories and temporary files",
+        "Skip backing up development/staging databases",
+        "Use database dump optimization for large databases",
+        "Implement compression to reduce backup file sizes",
+        "Schedule different backup types on different days"
+      ],
+      "resource_monitoring": [
+        "Monitor CPU usage during backup windows",
+        "Track memory consumption patterns",
+        "Watch disk I/O performance",
+        "Check database connection pool usage",
+        "Monitor backup completion times and success rates"
+      ],
+      "source_url": "https://wordpress.org/support/topic/backup-plugin-performance/"
+    },
+    {
+      "article_id": "seo_speed_optimization_balance",
+      "title": "Balancing SEO and Page Speed Optimization Plugins",
+      "category": "SEO Plugin Conflicts",
+      "scenario": "seo_pagespeed_conflicts", 
+      "problem_description": "Speed optimization breaking SEO features or vice versa",
+      "symptoms": [
+        "Structured data markup being stripped by minification",
+        "Important images lazy-loading when they shouldn't",
+        "SEO tracking scripts not loading due to JS optimization",
+        "Critical CSS breaking above-the-fold SEO content",
+        "Font optimization removing web font SEO benefits",
+        "Page speed improvements hurting search rankings"
+      ],
+      "solution_steps": [
+        "Create exceptions in speed plugins for SEO-critical elements",
+        "Exclude SEO tracking scripts from JavaScript optimization",
+        "Configure lazy loading to exclude above-the-fold images",
+        "Preserve structured data markup during HTML minification",
+        "Test Core Web Vitals after each optimization change",
+        "Monitor search console for crawling issues after speed changes",
+        "Use staged optimization approach - implement one change at a time",
+        "Verify that critical SEO elements load before speed optimizations",
+        "Check that schema markup validates after minification",
+        "Balance compression levels to preserve SEO metadata"
+      ],
+      "critical_seo_elements_to_protect": [
+        "Schema markup and structured data",
+        "Meta tags and Open Graph data",
+        "Header tags (H1, H2, etc.) hierarchy",
+        "Alt text on images",
+        "Internal linking structure",
+        "Web font loading for readability"
+      ],
+      "testing_workflow": [
+        "Test page speed before any changes (baseline)",
+        "Implement one optimization at a time",
+        "Validate structured data after each change",
+        "Check Core Web Vitals impact",
+        "Monitor search console for errors",
+        "Verify SEO tracking still works"
+      ],
+      "source_url": "https://wordpress.org/support/topic/seo-speed-conflicts/"
+    }
+  ],
+  "common_error_patterns": {
+    "sync_failures": {
+      "description": "Integration plugins failing to sync data between services",
+      "examples": [
+        "WooCommerce + Mailchimp sync stuck",
+        "WooCommerce + Stripe payment sync issues",
+        "Contact forms not sending to CRM"
+      ],
+      "typical_solutions": [
+        "Check API credentials",
+        "Verify server requirements",
+        "Test with minimal plugin setup",
+        "Monitor server resources during sync"
+      ]
+    },
+    "editor_conflicts": {
+      "description": "Page builders conflicting with other plugins",
+      "examples": [
+        "Elementor + Yoast SEO issues",
+        "Gutenberg + custom field plugins",
+        "Divi + WooCommerce display problems"
+      ],
+      "typical_solutions": [
+        "Update all plugins to latest versions",
+        "Check for theme compatibility",
+        "Test with default theme",
+        "Clear caches after changes"
+      ]
+    },
+    "javascript_errors": {
+      "description": "Frontend functionality breaking due to script conflicts",
+      "examples": [
+        "jQuery version conflicts", 
+        "Multiple analytics scripts interfering",
+        "Form validation not working"
+      ],
+      "typical_solutions": [
+        "Check browser console for errors",
+        "Deactivate scripts one by one",
+        "Use plugin-specific conflict resolution",
+        "Consider script optimization plugins"
+      ]
+    },
+    "payment_gateway_errors": {
+      "description": "E-commerce payment processing failures",
+      "examples": [
+        "Stripe payments failing at checkout",
+        "PayPal redirects to blank pages",
+        "Credit card forms not loading",
+        "Orders stuck in pending status"
+      ],
+      "typical_solutions": [
+        "Verify API credentials and webhook settings",
+        "Check SSL certificate validity",
+        "Test with different payment methods",
+        "Review gateway-specific logs"
+      ]
+    },
+    "security_false_positives": {
+      "description": "Security plugins blocking legitimate activities",
+      "examples": [
+        "Admin lockouts from failed login attempts",
+        "Contact forms blocked by spam filters",
+        "File uploads rejected by security scans",
+        "API calls blocked by firewall rules"
+      ],
+      "typical_solutions": [
+        "Review security plugin logs for false positives",
+        "Whitelist legitimate IP addresses",
+        "Adjust security rule sensitivity",
+        "Create exceptions for known good activities"
+      ]
+    },
+    "editor_compatibility": {
+      "description": "Block editor conflicts with legacy plugins",
+      "examples": [
+        "Custom fields not showing in Gutenberg",
+        "Meta boxes disappearing in block editor",
+        "JavaScript errors when loading editor",
+        "Forced fallback to classic editor"
+      ],
+      "typical_solutions": [
+        "Update plugins for block editor compatibility",
+        "Enable REST API support for custom fields",
+        "Check for Gutenberg-specific plugin settings",
+        "Consider switching to block-native alternatives"
+      ]
+    },
+    "caching_interference": {
+      "description": "Caching systems preventing dynamic functionality",
+      "examples": [
+        "User-specific content showing wrong data",
+        "Shopping carts not updating properly", 
+        "Login sessions not persisting",
+        "AJAX calls returning stale responses"
+      ],
+      "typical_solutions": [
+        "Exclude dynamic pages from cache",
+        "Configure user-specific cache rules",
+        "Set up proper cache invalidation",
+        "Review CDN caching policies"
+      ]
+    },
+    "backup_resource_conflicts": {
+      "description": "Backup processes overwhelming server resources",
+      "examples": [
+        "Site slowing down during backup windows",
+        "Backup jobs timing out or failing",
+        "Database locks preventing normal operations",
+        "Disk space exhaustion from backup files"
+      ],
+      "typical_solutions": [
+        "Schedule backups during off-peak hours",
+        "Implement incremental backup strategies",
+        "Increase server resource limits",
+        "Use cloud storage for backup destinations"
+      ]
+    },
+    "optimization_conflicts": {
+      "description": "Performance optimizations breaking SEO or functionality",
+      "examples": [
+        "Minification stripping structured data markup",
+        "Lazy loading preventing SEO image indexing",
+        "CSS optimization breaking critical styling",
+        "JavaScript deferring breaking tracking scripts"
+      ],
+      "typical_solutions": [
+        "Create exceptions for SEO-critical elements",
+        "Test optimizations impact on search visibility",
+        "Implement staged optimization rollouts",
+        "Monitor Core Web Vitals and search rankings"
+      ]
+    }
+  },
+  "debugging_tools": [
+    {
+      "name": "Health Check & Troubleshooting",
+      "purpose": "Safe plugin conflict testing without affecting live visitors",
+      "use_case": "Testing plugin combinations in troubleshooting mode"
+    },
+    {
+      "name": "Query Monitor", 
+      "purpose": "Monitor database queries, PHP errors, and API calls",
+      "use_case": "Identifying performance bottlenecks and errors"
+    },
+    {
+      "name": "WP Staging",
+      "purpose": "Create staging environment for safe testing",
+      "use_case": "Testing plugin updates and configurations"
+    },
+    {
+      "name": "Browser Developer Tools",
+      "purpose": "Monitor JavaScript errors and network requests", 
+      "use_case": "Debugging frontend conflicts and API issues"
+    }
+  ],
+  "search_intent_examples": [
+    {
+      "user_query": "My WooCommerce orders aren't syncing to Mailchimp",
+      "intent": "Sync troubleshooting",
+      "relevant_articles": ["mailchimp_sync_issues", "woo_conflict_testing"],
+      "expected_response": "Step-by-step sync troubleshooting specific to WooCommerce-Mailchimp integration"
+    },
+    {
+      "user_query": "Elementor editor won't load after installing Yoast",
+      "intent": "Plugin conflict resolution",
+      "relevant_articles": ["yoast_elementor_conflicts", "general_plugin_troubleshooting"],
+      "expected_response": "Conflict diagnosis steps and known compatibility issues"
+    },
+    {
+      "user_query": "How do I test which plugin is causing my site to break?",
+      "intent": "General troubleshooting methodology",
+      "relevant_articles": ["general_plugin_troubleshooting", "woo_conflict_testing"], 
+      "expected_response": "Systematic approach to plugin conflict testing"
+    },
+    {
+      "user_query": "White screen of death after plugin update",
+      "intent": "Emergency site recovery",
+      "relevant_articles": ["general_plugin_troubleshooting"],
+      "expected_response": "Immediate recovery steps and prevention strategies"
+    },
+    {
+      "user_query": "Stripe payments not working on my WooCommerce store",
+      "intent": "Payment gateway troubleshooting",
+      "relevant_articles": ["stripe_payment_failures", "woo_conflict_testing"],
+      "expected_response": "Payment-specific diagnostics and Stripe configuration checks"
+    },
+    {
+      "user_query": "Security plugin locked me out of my admin",
+      "intent": "Security plugin configuration issue",
+      "relevant_articles": ["security_plugin_overblocking", "general_plugin_troubleshooting"],
+      "expected_response": "Steps to regain admin access and prevent future lockouts"
+    },
+    {
+      "user_query": "Custom fields disappeared after updating to Gutenberg",
+      "intent": "Editor compatibility issue",
+      "relevant_articles": ["gutenberg_custom_field_issues"],
+      "expected_response": "Gutenberg compatibility steps and alternative solutions"
+    },
+    {
+      "user_query": "My contact form stopped working suddenly",
+      "intent": "Form functionality troubleshooting",
+      "relevant_articles": ["security_plugin_overblocking", "general_plugin_troubleshooting"],
+      "expected_response": "Form-specific troubleshooting including security plugin interference"
+    }
+  ]
+}
